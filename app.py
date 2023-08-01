@@ -24,7 +24,7 @@ def predict_species(iris: Optional[IrisSpecies] = None):
     }
     
     
-@app.get('/predict')
+@app.get('/getpredict')
 def predict_species(sepal_length: Optional[float] = None, sepal_width: Optional[float] = None,
                     petal_length: Optional[float] = None, petal_width: Optional[float] = None):
     if sepal_length is None or sepal_width is None or petal_length is None or petal_width is None:
