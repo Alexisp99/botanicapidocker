@@ -14,3 +14,4 @@ termcolor
 uvicorn
 fastapi
 pydantic
+black
