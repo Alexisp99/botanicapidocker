@@ -2,3 +2,4 @@ iris_model.pkl
 iris.csv
 __pycache__
 .python-version
+*:Zone.Identifier*
