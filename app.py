@@ -2,19 +2,23 @@
 import uvicorn
 from fastapi import FastAPI
 from typing import Optional
+print("mayber import")
 from model import IrisModel, IrisSpecies
 
 # 2. Create app and model objects
 app = FastAPI()
+print("app work")
 model = IrisModel()
-
+print("model load")
 # 3. Expose the prediction functionality, make a prediction from the passed
 #    JSON data and return the predicted flower species with the confidence
 @app.post('/predict')  # Changed from GET to POST
 def predict_species(iris: Optional[IrisSpecies] = None):
     if iris is None:
         return {"message": "No input data provided"}
-    data = iris.dict()
+    
+    # data = iris.dict()
+    data = iris.model_dump()
     prediction, probability = model.predict_species(
         data['sepal_length'], data['sepal_width'], data['petal_length'], data['petal_width']
     )
