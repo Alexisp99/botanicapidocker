@@ -48,8 +48,8 @@ def predict_species(iris: Optional[IrisSpecies] = None):
     if iris is None:
         return {"message": "No input data provided"}
     
-    data = iris.dict()
-    # data = iris.model_dump()
+    # data = iris.dict()
+    data = iris.model_dump()
     prediction, probability = model.predict_species(
         data['sepal_length'], data['sepal_width'], data['petal_length'], data['petal_width']
     )
