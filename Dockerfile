@@ -15,9 +15,10 @@ WORKDIR /app
 
 
 # install the packages from the Pipfile in the container
-RUN pip install pipenv
+RUN pip install --upgrade pipenv
+
 # RUN pipenv install --system --deploy 
-RUN pipenv install --system --deploy --ignore-pipfile
+RUN pipenv install --system --deploy --ignore-pipfile --clear
 
 
 
