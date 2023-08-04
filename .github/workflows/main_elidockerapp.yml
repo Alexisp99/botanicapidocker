@@ -25,7 +25,7 @@ jobs:
 
     - name: Build and push container image to registry using Docker Compose
       run: |
-        export DOCKER_REGISTRY=https://elicontainer.azurecr.io/
+        export DOCKER_REGISTRY=elicontainer.azurecr.io
         export DOCKER_USERNAME=${{ secrets.AzureAppService_ContainerUsername_6614b9f8aa9d4e2fad1aa6405711655e }}
         export DOCKER_TAG=${{ github.sha }}
         export PORT=8000
