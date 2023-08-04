@@ -3,7 +3,14 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from pydantic import BaseModel
 import joblib
+from typing import Optional, List
 
+#struture table inputs
+class bddinputs(BaseModel):
+    input: Optional[str]
+    prediction : Optional[int]
+    probability : Optional[float]
+    istrue : Optional[int]
 
 # 2. Class which describes a single flower measurements
 class IrisSpecies(BaseModel):
