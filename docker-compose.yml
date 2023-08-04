@@ -1,14 +1,10 @@
 version: '3'
 services:
   irisapi:
-    image: 'elicontainer.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_6614b9f8aa9d4e2fad1aa6405711655e }}/irisapisimplondocker:${{ github.sha }}'
-    build:
+    image: ${DOCKER_REGISTRY}/${DOCKER_USERNAME}/irisapisimplondocker:${DOCKER_TAG}
+    build: 
       context: .
       dockerfile: Dockerfile
-      args:
-        - PYTHON_VERSION=3.8.12-buster
-    volumes:
-      - .:/app
     ports:
       - "${PORT}:8000"
     environment:
