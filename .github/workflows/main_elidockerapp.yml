@@ -13,9 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Lint with black
-      run: black *.py
-
     - name: Test with pytest
       run: pytest tests/test_fast.py
 
