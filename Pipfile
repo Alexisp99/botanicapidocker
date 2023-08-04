@@ -16,6 +16,7 @@ joblib = "*"
 scipy = "==1.10.1"
 pymysql = "*"
 python-dotenv = "*"
+pytest = "*"
 
 [dev-packages]
 
