@@ -7,6 +7,7 @@ COPY Pipfile /app/Pipfile
 COPY Pipfile.lock /app/Pipfile.lock
 COPY model.py /app/model.py
 COPY iris.csv /app/iris.csv
+COPY tests/ /tests/
 #COPY iris_model.pkl /app/iris_model.pkl
 
 

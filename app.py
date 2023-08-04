@@ -1,7 +1,7 @@
 # 1. Library imports
 import uvicorn
 from fastapi import FastAPI
-from typing import Optional
+from typing import Optional, List
 from model import IrisModel, IrisSpecies
 import pymysql
 import os
@@ -71,6 +71,31 @@ def predict_species(sepal_length: Optional[float] = None, sepal_width: Optional[
     }
 
 
+#BDD
+@app.get("/")
+async def get_items() -> List[bddinputs]:
+    # Effectuer des opérations sur la base de données
+    conn = connect()
+    with conn.cursor() as cursor:
+        cursor.execute("SELECT * FROM train_table")
+        results = cursor.fetchall()
+
+    # Convertir les résultats en une liste d'objets Test a refacto par la suite
+    items = []
+    for row in results:
+        data_dict = {
+            "input": row[0],
+            "prediction" : row[1],
+            "probability" : row[2],
+            "istrue" : row[3],
+        }
+
+        data_user = bddinputs(**data_dict)
+        items.append(data_user)
+
+    # Retourner les résultats de l'API
+    return items
+
 @app.post("/add")
 async def create_item(item: bddinputs):
     # Effectuer des opérations sur la base de données
@@ -83,6 +108,18 @@ async def create_item(item: bddinputs):
         conn.commit()
 
     return {"message": "Item created successfully"}
+
+
+@app.delete("/del")
+async def delete_item():
+    # Effectuer des opérations sur la base de données
+    conn = connect()
+    with conn.cursor() as cursor:
+        query = "DELETE FROM train_table"
+        cursor.execute(query)
+        conn.commit()
+
+    return {"message": "Items deleted successfully"}
 
 
 # # 4. Run the API with uvicorn
