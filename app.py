@@ -3,12 +3,35 @@ import uvicorn
 from fastapi import FastAPI
 from model import IrisModel, IrisSpecies, bddinputs
 from typing import Optional, List
-from connect import connect
+from dotenv import load_dotenv
+import pymysql
+import os
+from urllib.parse import urlparse
 
 # 2. Create app and model objects
 app = FastAPI()
 model = IrisModel()
 
+
+def connect():
+    load_dotenv()
+    database_url = os.getenv("DATABASE_URL")
+
+    # Parse the database URL
+    url_components = urlparse(database_url)
+    db_host = url_components.hostname
+    db_user = url_components.username
+    db_password = url_components.password
+    db_name = url_components.path[1:]  
+
+    # Configurer la connexion à la base de données MySQL
+    conn = pymysql.connect(
+        host=db_host,
+        user=db_user,
+        password=db_password,
+        database=db_name
+    )
+    return conn
 
 # 3. Expose the prediction functionality, make a prediction from the passed
 #    JSON data and return the predicted flower species with the confidence
