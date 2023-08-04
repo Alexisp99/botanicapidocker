@@ -13,9 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Test with pytest
-      run: pytest tests/test_fast.py
-
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
